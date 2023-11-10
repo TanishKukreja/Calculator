@@ -18,22 +18,83 @@ class ViewController: UIViewController {
     let OneStackView = UIStackView()
     let FourStackView = UIStackView()
     let ZeroHorizontalStackView = UIStackView()
-
+    var workings : String = ""
+    
+    
+    func addToWorkings(value:String) {
+        workings = workings+value
+        readingLabel.text = workings
+    }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
     }
     
+    func allClearButtonTapped(){
+        workings = ""
+        readingLabel.text = ""
+    }
+    
     @objc func ACButtonTapped(_ sender: UIButton){
-        
-        readingLabel.text = "0"
+        allClearButtonTapped()
         
     }
     @objc func SevenButtonTapped(_ sender: UIButton){
         
-        readingLabel.text = "7"
+        addToWorkings(value: "7")
+
         
     }
+    
+    @objc func EightButtonTapped(_ sender: UIButton){
+        
+        addToWorkings(value: "8")
+        
+    }
+    
+    @objc func NineButtonTapped(_ sender: UIButton){
+        
+        addToWorkings(value: "9")
+        
+    }
+    
+    @objc func SixButtonTapped(_ sender: UIButton){
+        
+        addToWorkings(value: "6")
+        
+    }
+    @objc func FiveButtonTapped(_ sender: UIButton){
+        
+        addToWorkings(value: "5")
+        
+    }
+    @objc func FourButtonTapped(_ sender: UIButton){
+        
+        addToWorkings(value: "4")
+        
+    }
+    @objc func ThreeButtonTapped(_ sender: UIButton){
+        
+        addToWorkings(value: "3")
+        
+    }
+    
+    @objc func TwoButtonTapped(_ sender: UIButton){
+        
+        addToWorkings(value: "2")
+        
+    }
+    @objc func ZeroButtonTapped(_ sender: UIButton){
+        
+        addToWorkings(value: "0")
+        
+    }
+    @objc func OneButtonTapped(_ sender: UIButton){
+        
+        addToWorkings(value: "1")
+        
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -119,7 +180,7 @@ class ViewController: UIViewController {
 
         for i in 0..<4 {
             let button = UIButton()
-            button.frame = CGRect(x: 0, y: 0, width: 100, height: 100) // Set the frame
+            button.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
 
             if i == 0 {
                 button.addTarget(self, action:#selector(SevenButtonTapped(_:)), for: .touchUpInside)
@@ -128,10 +189,14 @@ class ViewController: UIViewController {
                 button.backgroundColor = .darkGray
 
             } else if i == 1 {
+                button.addTarget(self, action:#selector(EightButtonTapped(_:)), for: .touchUpInside)
+
                 button.setTitle("8", for: .normal)
                 button.backgroundColor = .darkGray
 
             } else if i == 2 {
+                button.addTarget(self, action:#selector(NineButtonTapped(_:)), for: .touchUpInside)
+
                 button.setTitle("9", for: .normal)
                 button.backgroundColor = .darkGray
             } else {
@@ -152,13 +217,19 @@ class ViewController: UIViewController {
 
             if i == 0 {
                 button.setTitle("4", for: .normal)
+                button.addTarget(self, action:#selector(FourButtonTapped(_:)), for: .touchUpInside)
+
                 button.backgroundColor = .darkGray
 
             } else if i == 1 {
+                button.addTarget(self, action:#selector(FiveButtonTapped(_:)), for: .touchUpInside)
+
                 button.setTitle("5", for: .normal)
                 button.backgroundColor = .darkGray
 
             } else if i == 2 {
+                button.addTarget(self, action:#selector(SixButtonTapped(_:)), for: .touchUpInside)
+
                 button.setTitle("6", for: .normal)
                 button.backgroundColor = .darkGray
 
@@ -178,14 +249,20 @@ class ViewController: UIViewController {
             let button = UIButton()
             button.frame = CGRect(x: 0, y: 0, width: 100, height: 100) // Set the frame
             if i == 0 {
+                button.addTarget(self, action:#selector(OneButtonTapped(_:)), for: .touchUpInside)
+
                 button.setTitle("1", for: .normal)
                 button.backgroundColor = .darkGray
 
             } else if i == 1 {
+                button.addTarget(self, action:#selector(TwoButtonTapped(_:)), for: .touchUpInside)
+
                 button.setTitle("2", for: .normal)
                 button.backgroundColor = .darkGray
 
             } else if i == 2 {
+                button.addTarget(self, action:#selector(ThreeButtonTapped(_:)), for: .touchUpInside)
+
                 button.setTitle("3", for: .normal)
                 button.backgroundColor = .darkGray
 
@@ -207,12 +284,14 @@ class ViewController: UIViewController {
             button.frame = CGRect(x: 0, y: 0, width: 100, height: 100) // Set the frame
             if i == 0 {
                 button.setTitle("0", for: .normal)
-                button.backgroundColor = .darkGray
+                button.addTarget(self, action:#selector(ZeroButtonTapped(_:)), for: .touchUpInside)
 
+                button.backgroundColor = .darkGray
+                
             } else if i == 1 {
                 button.setTitle(".", for: .normal)
                 button.backgroundColor = .darkGray
-
+                
             }  else {
                 button.setTitle("=", for: .normal)
                 button.backgroundColor = .orange
@@ -221,12 +300,9 @@ class ViewController: UIViewController {
             button.layer.cornerRadius = button.bounds.height / 2
             button.clipsToBounds = true
             button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 28)
-
+            
             ZeroHorizontalStackView.addArrangedSubview(button)
         }
-      
-        
-        
 
         NSLayoutConstraint.activate([
 
@@ -246,6 +322,5 @@ class ViewController: UIViewController {
             ])
             
         }
-        
         
     }
