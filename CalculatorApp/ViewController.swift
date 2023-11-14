@@ -20,14 +20,9 @@ class ViewController: UIViewController {
     let ZeroHorizontalStackView = UIStackView()
     var workings : String = ""
     
-    
     func addToWorkings(value:String) {
         workings = workings+value
         readingLabel.text = workings
-    }
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
     }
     
     func allClearButtonTapped(){
@@ -35,21 +30,32 @@ class ViewController: UIViewController {
         readingLabel.text = ""
     }
     
+    func plusButtonTapped(){
+        
+    }
+
+    func MinusButtonTapped(){
+        
+    }
+    
+    func MultiplyButtonTapped(){
+        
+    }
+    
+    func DivideButtonTapped(){
+        
+    }
+    
     @objc func ACButtonTapped(_ sender: UIButton){
         allClearButtonTapped()
         
     }
     @objc func SevenButtonTapped(_ sender: UIButton){
-        
         addToWorkings(value: "7")
-
-        
     }
     
     @objc func EightButtonTapped(_ sender: UIButton){
-        
         addToWorkings(value: "8")
-        
     }
     
     @objc func NineButtonTapped(_ sender: UIButton){
@@ -89,10 +95,25 @@ class ViewController: UIViewController {
         addToWorkings(value: "0")
         
     }
+    
     @objc func OneButtonTapped(_ sender: UIButton){
         
         addToWorkings(value: "1")
         
+    }
+    
+    
+    @objc func swipeLabel(_ sender: UISwipeGestureRecognizer){
+        if sender.direction == .left && readingLabel.text?.isEmpty == false{
+            workings.removeLast()
+            readingLabel.text = workings
+        }
+        else if sender.direction == .right{
+            print("right")
+        }
+        else{
+            print("nothing")
+        }
     }
 
     override func viewDidLoad() {
@@ -101,6 +122,11 @@ class ViewController: UIViewController {
         
         let stackViewHeight = 0.55 * screenHeight
         let labelHeight = 0.1 * screenHeight
+        
+        let swipeLabel = UISwipeGestureRecognizer(target: self, action: #selector(swipeLabel(_:)))
+        readingLabel.addGestureRecognizer(swipeLabel)
+        readingLabel.isUserInteractionEnabled = true
+        swipeLabel.direction = .left
 
         view.backgroundColor = .black
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -145,12 +171,10 @@ class ViewController: UIViewController {
         ZeroHorizontalStackView.distribution = .fillProportionally
         ZeroHorizontalStackView.spacing = 10
         
-
         readingLabel.translatesAutoresizingMaskIntoConstraints = false
         readingLabel.textColor = .white
         readingLabel.textAlignment = .right
         readingLabel.font = UIFont.systemFont(ofSize: 82)
-//        readingLabel.backgroundColor = .gray
         
         
         for i in 0..<4 {
@@ -306,7 +330,6 @@ class ViewController: UIViewController {
 
         NSLayoutConstraint.activate([
 
-                
                 readingLabel.bottomAnchor.constraint(equalTo: calculatorStackView.topAnchor,constant: -10),
                 readingLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor),
                 readingLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor),
@@ -316,8 +339,6 @@ class ViewController: UIViewController {
                 calculatorStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
                 calculatorStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
                 calculatorStackView.heightAnchor.constraint(equalToConstant: stackViewHeight),
-                
-                
                 
             ])
             
