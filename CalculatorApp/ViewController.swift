@@ -25,25 +25,50 @@ class ViewController: UIViewController {
         readingLabel.text = workings
     }
     
+    func getResult(){
+        print("Result")
+    }
+    
     func allClearButtonTapped(){
         workings = ""
         readingLabel.text = ""
     }
     
     func plusButtonTapped(){
-        
+        print("plus")
+    
     }
 
-    func MinusButtonTapped(){
-        
+    func SubtractButtonTapped(){
+        print("Subtract")
     }
     
     func MultiplyButtonTapped(){
-        
+        print("Multiply")
+
     }
     
     func DivideButtonTapped(){
-        
+        print("Divide")
+    }
+    
+    @objc func resultButtonTapped(_ sender:UIButton){
+        getResult()
+    }
+    
+    @objc func divideButtonTapped(_ sender: UIButton){
+        DivideButtonTapped()
+    }
+    
+    @objc func plusButtonTapped(_ sender: UIButton){
+        plusButtonTapped()
+    }
+    @objc func SubtractButtonTapped(_ sender: UIButton){
+        SubtractButtonTapped()
+    }
+    
+    @objc func MultiplyButtonTapped(_ sender: UIButton){
+        MultiplyButtonTapped()
     }
     
     @objc func ACButtonTapped(_ sender: UIButton){
@@ -192,6 +217,8 @@ class ViewController: UIViewController {
                      button.backgroundColor = .lightGray
                  } else {
                      button.setTitle("/", for: .normal)
+                     button.addTarget(self, action:#selector(divideButtonTapped(_:)), for: .touchUpInside)
+
                      button.backgroundColor = .orange
                  }
                  button.setTitleColor(.white, for: .normal)
@@ -225,6 +252,8 @@ class ViewController: UIViewController {
                 button.backgroundColor = .darkGray
             } else {
                 button.setTitle("X", for: .normal)
+                button.addTarget(self, action:#selector(MultiplyButtonTapped(_:)), for: .touchUpInside)
+
                 button.backgroundColor = .orange
             }
             button.setTitleColor(.white, for: .normal)
@@ -259,6 +288,8 @@ class ViewController: UIViewController {
 
             } else {
                 button.setTitle("-", for: .normal)
+                button.addTarget(self, action:#selector(SubtractButtonTapped(_:)), for: .touchUpInside)
+
                 button.backgroundColor = .orange
             }
             button.setTitleColor(.white, for: .normal)
@@ -292,7 +323,9 @@ class ViewController: UIViewController {
 
             } else {
                 button.setTitle("+", for: .normal)
-                
+            
+                button.addTarget(self, action:#selector(plusButtonTapped(_:)), for: .touchUpInside)
+
                 button.backgroundColor = .orange
             }
             button.setTitleColor(.white, for: .normal)
@@ -318,6 +351,8 @@ class ViewController: UIViewController {
                 
             }  else {
                 button.setTitle("=", for: .normal)
+                button.addTarget(self, action:#selector(resultButtonTapped(_:)), for: .touchUpInside)
+
                 button.backgroundColor = .orange
             }
             button.setTitleColor(.white, for: .normal)
