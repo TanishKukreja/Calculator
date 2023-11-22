@@ -9,8 +9,17 @@ import UIKit
 
 class ViewController: UIViewController {
     
+    
+    var temp : Double = 0
+    var total : Double = 0
+    private var operating:Bool=false
+    private var operation : OperationType =  .NONE
+    
+    private let kDecimalSeparator = Locale.current.decimalSeparator
+    private let kMaxLength = 9
+    private let kTotal = "total"
+    
     var readingLabel = UILabel()
-    var button: UIButton!
     var calculatorStackView = UIStackView()
     let screenHeight = UIScreen.main.bounds.height
     let CHorizontalStackView = UIStackView()
@@ -19,55 +28,180 @@ class ViewController: UIViewController {
     let FourStackView = UIStackView()
     let ZeroHorizontalStackView = UIStackView()
     var workings : String = ""
+    var button : UIButton!
+
     
     func addToWorkings(value:String) {
         workings = workings+value
         readingLabel.text = workings
     }
     
-    func getResult(){
-        print("Result")
+    
+    func plusButtonTapped(){
+        
+        operation = .ADDICION
+        
+        temp = Double(readingLabel.text!) ?? 0.0
+        
+        print(temp)
+        
+        if(temp.description.count > 0 ){
+            allClearButtonTapped()
+        }
+        
+        else{
+            print("No values found")
+        }
+
+        
+       
+        
     }
+    
+    private enum OperationType {
+        case NONE,ADDICION,SUBSTRACTION,DIVISION,PORCENT,MULTIPLICATION
+    }
+    
+    private func result(){
+        
+        
+        switch operation {
+            
+        case .NONE:
+            break
+            
+        case .ADDICION:
+            
+            
+            print("Addition tapped")
+    
+            total = temp + Double(readingLabel.text!)!
+            print(total)
+            readingLabel.text = String(total)
+            
+            
+            break
+            
+        case .SUBSTRACTION:
+            
+            print("Subtraction tapped")
+    
+            total = temp - Double(readingLabel.text!)!
+            print(total)
+            readingLabel.text = String(total)
+
+            break
+        case .MULTIPLICATION:
+            
+            print("Multiplication tapped")
+    
+            total = temp * Double(readingLabel.text!)!
+            print(total)
+            readingLabel.text = String(total)
+
+            break
+        case .DIVISION:
+            
+            print("Divison  tapped")
+    
+            total = temp / Double(readingLabel.text!)!
+            print(total)
+            readingLabel.text = String(total)
+
+            break
+        case .PORCENT:
+            temp = temp / 100
+            total = temp
+            readingLabel.text = String(total)
+
+            break
+            
+        default :
+            print("nothing executed")
+        }
+    }
+    
+
+    
     
     func allClearButtonTapped(){
         workings = ""
         readingLabel.text = ""
     }
     
-    func plusButtonTapped(){
-        print("plus")
-    
-    }
+   
 
     func SubtractButtonTapped(){
-        print("Subtract")
+        
+        temp = Double(readingLabel.text!) ?? 0.0
+        
+        print(temp)
+        
+        if(temp.description.count > 0 ){
+            allClearButtonTapped()
+        }
+        
+        else{
+            print("No values found")
+        }
+
+        print(readingLabel.text)
     }
     
     func MultiplyButtonTapped(){
-        print("Multiply")
+        temp = Double(readingLabel.text!) ?? 0.0
+        
+        print(temp)
+        
+        if(temp.description.count > 0 ){
+            allClearButtonTapped()
+        }
+        
+        else{
+            print("No values found")
+        }
 
+        print(readingLabel.text)
     }
     
     func DivideButtonTapped(){
-        print("Divide")
+        temp = Double(readingLabel.text!) ?? 0.0
+        
+        print(temp)
+        
+        if(temp.description.count > 0 ){
+            allClearButtonTapped()
+        }
+        
+        else{
+            print("No values found")
+        }
+
+        print(readingLabel.text)
     }
     
-    @objc func resultButtonTapped(_ sender:UIButton){
-        getResult()
+    @objc func equalTotButtonTapped(_ sender:UIButton){
+
+          result()
     }
     
-    @objc func divideButtonTapped(_ sender: UIButton){
+    
+@objc func divideButtonTapped(_ sender: UIButton){
+    operation = .DIVISION
         DivideButtonTapped()
     }
     
     @objc func plusButtonTapped(_ sender: UIButton){
+        operation = .ADDICION
         plusButtonTapped()
     }
     @objc func SubtractButtonTapped(_ sender: UIButton){
+        operation = .SUBSTRACTION
         SubtractButtonTapped()
     }
     
     @objc func MultiplyButtonTapped(_ sender: UIButton){
+        operation = .MULTIPLICATION
         MultiplyButtonTapped()
     }
     
@@ -134,10 +268,8 @@ class ViewController: UIViewController {
             readingLabel.text = workings
         }
         else if sender.direction == .right{
-            print("right")
         }
         else{
-            print("nothing")
         }
     }
 
@@ -203,7 +335,7 @@ class ViewController: UIViewController {
         
         
         for i in 0..<4 {
-                 let button = UIButton()
+                  button = UIButton()
                  button.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
                  if i == 0 {
                      button.addTarget(self, action:#selector(ACButtonTapped(_:)), for: .touchUpInside)
@@ -230,7 +362,7 @@ class ViewController: UIViewController {
              }
 
         for i in 0..<4 {
-            let button = UIButton()
+             button = UIButton()
             button.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
 
             if i == 0 {
@@ -265,7 +397,7 @@ class ViewController: UIViewController {
         }
 
         for i in 0..<4 {
-            let button = UIButton()
+             button = UIButton()
             button.frame = CGRect(x: 0, y: 0, width: 100, height: 100) // Set the frame
 
             if i == 0 {
@@ -301,7 +433,7 @@ class ViewController: UIViewController {
         }
 
         for i in 0..<4 {
-            let button = UIButton()
+             button = UIButton()
             button.frame = CGRect(x: 0, y: 0, width: 100, height: 100) // Set the frame
             if i == 0 {
                 button.addTarget(self, action:#selector(OneButtonTapped(_:)), for: .touchUpInside)
@@ -337,7 +469,7 @@ class ViewController: UIViewController {
         }
 
         for i in 0..<3 {
-            let button = UIButton()
+             button = UIButton()
             button.frame = CGRect(x: 0, y: 0, width: 100, height: 100) // Set the frame
             if i == 0 {
                 button.setTitle("0", for: .normal)
@@ -351,7 +483,7 @@ class ViewController: UIViewController {
                 
             }  else {
                 button.setTitle("=", for: .normal)
-                button.addTarget(self, action:#selector(resultButtonTapped(_:)), for: .touchUpInside)
+                button.addTarget(self, action:#selector(equalTotButtonTapped(_:)), for: .touchUpInside)
 
                 button.backgroundColor = .orange
             }
