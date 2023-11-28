@@ -22,12 +22,14 @@ class SplashViewController : UIViewController{
         logoImageView = UIImageView()
 
         logoImageView.translatesAutoresizingMaskIntoConstraints = false
-        logoImageView.image = UIImage(named: "appstore 1")
+        logoImageView.image = UIImage(named: "appstore 2")
+        logoImageView.isUserInteractionEnabled = true
         view.addSubview(logoImageView)
-
-       
         logoImageView.backgroundColor = .blue
+
         
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(splashLogoTapped))
+        logoImageView.addGestureRecognizer(tapGesture)
         
         NSLayoutConstraint.activate([
             
@@ -41,14 +43,22 @@ class SplashViewController : UIViewController{
         openNewViewControllerAfterDelay()
         
     }
+    let calculator = CalculatorViewController()
+    
+    @objc func splashLogoTapped(){
+//        navigationController?.pushViewController(CalculatorViewController(), animated: true)
+        self.present(calculator, animated: true, completion: nil)
+
+        print("tapped")
+    }
     
     func openNewViewControllerAfterDelay() {
         let delayInSeconds: Double = 1.0
 
         DispatchQueue.main.asyncAfter(deadline: .now() + delayInSeconds) {
-            let calculator = CalculatorViewController()
+      
 
-            self.present(calculator, animated: true, completion: nil)
+            self.present(self.calculator, animated: true, completion: nil)
         
         }
     }
